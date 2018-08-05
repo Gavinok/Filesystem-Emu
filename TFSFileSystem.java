@@ -241,6 +241,7 @@ class PartianControlBlock
 		{
 			FreeSpaceLinkedList.push(new Integer(FreeBlockLocation));
 		}
+		// gives the index of a free block by removing it
 		int getFreeBlock()
 		{
 			if(!(FreeSpaceLinkedList.size() == 0))
@@ -254,6 +255,7 @@ class PartianControlBlock
 			}
 			
 		}
+		// gives the index of a free block without removing it
 		int checkFreeBlock()
 		{
 			if(!(FreeSpaceLinkedList.size() == 0))
@@ -353,11 +355,12 @@ class FileAllocationTable
 		}
 		this.EntrieTable = values;
 	}
+	// block at the specified index.
 	void setBlockTotable(int Index, Block NewBlock)
 	{
 		BlockTable[Index] = NewBlock;
 	}
-
+	//converts the FAT into a block to be written on disk
 	Block[] toBlocks()
 	{
 		System.out.println("creating FAT Block");
@@ -403,6 +406,8 @@ class FileAllocationTable
 	{
 		return EntrieTable;
 	}
+	
+	//converts the FAT into a String
 	public String toString()
 	{
 		String FATString = " here is the FAT as a String SIZE of ENTRY TABLE " + tableSize + " ENTRY TABLE:" + Arrays.toString(EntrieTable);
@@ -532,20 +537,6 @@ class FileAttributes
 
 public class TFSFileSystem
 {
-	//main-------------------------------------------------------------------------
-	 public static void main(String[] args){
-		TFSFileSystem fs = new TFSFileSystem();
-		System.out.println(fs.tfs_mkfs());// if a 0 is printed no errors occur if its 1 then the filesystem already existed
-		//Block[] test =  FAT.toBlocks();
-		//FileAllocationTable newFAT = new FileAllocationTable(test);
-		System.out.println(fs.tfs_umount());
-		System.out.println(fs.tfs_mount());
-		System.out.println(fs.tfs_prmfs());// if a null is printed an errors occur since 
-		//System.out.println(fs.tfs_exit());// the file should already be closed since it was not left open
-	 }
-	//main-------------------------------------------------------------------------
-
-
 	private static TFSDiskInputOutput HardDisk;
 	//the limit to how large a new file can be
 	private static final int BlockSixeLimit = 128;
