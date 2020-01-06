@@ -35,36 +35,42 @@ class Block<T>{
 	{
 			return BlockContents;
 	}
+	
 	private int setBlock(byte[] NewContents){
 		if(NewContents.length < 128)
 		{
+
 			System.out.println("block is less then 128 bytes");
-			String tempString = new String(NewContents.toString());
-			System.out.println(tempString.getBytes().length);
-			System.out.println(tempString.length());
-			while(tempString.length() < 128)
-			{
-				tempString =  tempString + "*";
-				System.out.println("tempString.length() ");
-				System.out.println(tempString.length() );
-			}
 			
-			System.out.println("block has been writen");
-			System.out.print("size is ");
-			System.out.println(tempString.getBytes().length);
-			BlockContents = tempString.getBytes();
-			return 1;
+			try {				
+				String tempString = new String(NewContents, "UTF-8");
+			
+				while(tempString.length() < 128)
+				{
+					tempString =  tempString + "*";
+				}
+				System.out.println("block has been writen");
+
+				try {
+					BlockContents = tempString.getBytes("UTF-8");
+				} catch (Exception e) {
+					System.out.println("failed at setBlock(byte[] NewContents){");
+					return 0;
+				}
+			
+				return 1;
+			} catch (Exception e) {
+				System.out.println("failed at private int setBlock(byte[] NewContents){");
+				return 2;
+			}
 		}
 		if(NewContents.length > 128)
 		{
-			//System.out.println("block is more then 128 bytes");
-			//System.out.println("block has not been writen");
+			System.out.println("Block is too big");
 			return -1;
 		}
 		else{
-			//System.out.println("perfect fit");
 			BlockContents = NewContents;
-			//System.out.println("block has been writen");
 			return 0;
 		}
 	}
