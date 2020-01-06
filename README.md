@@ -125,13 +125,14 @@ The Directory holds the following:
 
 
 # FileAttributes Class
-the FileAttributes class holds the following information(based on the Project requirements):
-    - If it is a file or directory
-    - The name of the file/directory as an array of 15 bytes
-    - The first block in the FAT for this file(if its a file)
-    - The file name as a string
-    - The length of the name
-    - The size of the file/directory
+
+The FileAttributes class holds the following information(based on the Project requirements):
+- If it is a file or directory
+- The name of the file/directory as an array of 15 bytes
+- The first block in the FAT for this file(if its a file)
+- The file name as a string
+- The length of the name
+- The size of the file/directory
 
 ## Methods
 
